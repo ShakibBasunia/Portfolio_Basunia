@@ -3,219 +3,315 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Shohedozzaman Basunia | 3D portfolio: ML and educational technology</title>
+<title>Shohedozzaman Basunia | Applied ML and EdTech Researcher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#060912;--ink:#e9eefc;--soft:#9aa6c7;--glass:rgba(11,17,40,.66);--line:rgba(160,180,255,.2);--acc:#36e0ff;color-scheme:dark;
+:root{--bg:#f6f8ff;--card:#fff;--ink:#0b1f5e;--text:#3d4a73;--soft:#6a7599;--blue:#2457f5;--blue2:#7c5cff;--line:#e2e8f7;--glow:rgba(36,87,245,.13);--sh:0 10px 34px rgba(30,60,160,.08);color-scheme:light;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070d1f;--card:#0f1730;--ink:#eaf0ff;--text:#b4c0e4;--soft:#8593bb;--blue:#6f90ff;--blue2:#a58bff;--line:#1f2b50;--glow:rgba(111,144,255,.15);--sh:0 10px 34px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#070d1f;--card:#0f1730;--ink:#eaf0ff;--text:#b4c0e4;--soft:#8593bb;--blue:#6f90ff;--blue2:#a58bff;--line:#1f2b50;--glow:rgba(111,144,255,.15);--sh:0 10px 34px rgba(0,0,0,.35);color-scheme:dark}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{background:radial-gradient(1100px 700px at 72% 18%,#14204f 0,transparent 62%),radial-gradient(800px 600px at 10% 90%,#1a1037 0,transparent 60%),var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;overflow:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;color:var(--text);font:16.5px/1.7 "Plus Jakarta Sans",system-ui,sans-serif;background:radial-gradient(900px 520px at 85% -5%,var(--glow),transparent 65%),radial-gradient(700px 500px at -5% 40%,var(--glow),transparent 65%),var(--bg)}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
-#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0}
-.brand{position:fixed;left:24px;top:calc(18px + env(safe-area-inset-top,0px));z-index:5;font:600 1.05rem "Space Grotesk",sans-serif;letter-spacing:.01em;text-decoration:none}
-.brand i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--acc);margin-right:9px;box-shadow:0 0 14px var(--acc);transition:background .6s,box-shadow .6s}
-.view{position:fixed;inset:0;z-index:2;display:none;align-items:center;padding:84px 6vw 120px;pointer-events:none}
-.view.on{display:flex;animation:fd .55s ease both}
-@keyframes fd{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.view>*{pointer-events:auto}
-.panel{max-width:560px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:26px;padding:34px 34px 30px}
-h1{font:600 clamp(2.5rem,6.4vw,5rem)/.98 "Space Grotesk",sans-serif;letter-spacing:-.035em;margin:0 0 18px}
-h2{font:600 clamp(1.9rem,4vw,2.8rem)/1.05 "Space Grotesk",sans-serif;letter-spacing:-.025em;margin:0 0 12px}
-p{margin:0 0 16px}
-.soft{color:var(--soft)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
-.chips li{border:1px solid var(--line);border-radius:999px;padding:3px 13px;font-size:.85rem;color:var(--soft)}
-.btn{display:inline-block;padding:11px 22px;border-radius:12px;background:var(--acc);color:#04101a;font-weight:500;text-decoration:none;margin:0 10px 8px 0;transition:background .6s}
-.btn.g{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.scroll{max-height:calc(100svh - 215px);overflow:auto}
-.pap{padding:15px 0;border-top:1px solid var(--line)}
-.pap:first-child{border-top:0;padding-top:0}
-.pap b{display:block;font:500 1.05rem "Space Grotesk",sans-serif}
-.pap span{display:block;color:var(--acc);font-size:.85rem;transition:color .6s}
-.pap p{margin:2px 0 0;color:var(--soft);font-size:.94rem}
-.facts{list-style:none;margin:18px 0 0;padding:0}
-.facts li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:.95rem}
-.facts li span:first-child{color:var(--soft)}.facts li span:last-child{text-align:right}
-.mail{font:600 clamp(1.3rem,3.4vw,2rem) "Space Grotesk",sans-serif;text-decoration:none;color:var(--acc);word-break:break-all;display:block;margin:6px 0 22px}
-#vp{flex-direction:column;justify-content:center;align-items:stretch;text-align:center}
-#vp .top{pointer-events:auto}
-.deck{height:400px;perspective:1300px;display:flex;justify-content:center;align-items:center;touch-action:pan-y;cursor:grab;user-select:none}
-.deck:active{cursor:grabbing}
-.ring{position:relative;width:260px;height:340px;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.ring.d{transition:none}
-.card{position:absolute;inset:0;text-align:left;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:22px;padding:26px 24px;backface-visibility:hidden;opacity:.5;transition:opacity .4s,border-color .4s,box-shadow .4s;display:flex;flex-direction:column}
-.card.act{opacity:1;border-color:var(--acc);box-shadow:0 0 40px -8px var(--acc)}
-.card .t{font-size:.8rem;color:var(--acc);margin-bottom:10px;transition:color .6s}
-.card h3{font:600 1.55rem/1.1 "Space Grotesk",sans-serif;letter-spacing:-.02em;margin:0 0 12px}
-.card p{font-size:.94rem;color:var(--soft);margin:0}
-.ctl{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:8px}
-.ctl button{width:44px;height:44px;border-radius:50%;background:var(--glass);border:1px solid var(--line);color:var(--ink);font-size:1.1rem;cursor:pointer}
-#cnt{min-width:64px;font-size:.9rem;color:var(--soft)}
-.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;gap:4px;padding:6px;background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:999px}
-.dock a{text-decoration:none;padding:8px 16px;border-radius:999px;font-size:.92rem;color:var(--soft);transition:.25s}
-.dock a.on{background:var(--acc);color:#04101a;font-weight:500}
-#v-home{justify-content:space-between;gap:24px}
-.mapbox{width:min(480px,42vw);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:26px;padding:16px 16px 18px}
-.mapbox .cap{margin:0 0 2px;font-size:.85rem;color:var(--soft)}
-#msvg{width:100%;height:auto;display:block}
-#msvg .e{stroke:var(--line);stroke-width:1.5;transition:stroke .3s}
-#msvg .e.on{stroke:var(--acc);stroke-width:2.2}
-#msvg g.n{cursor:pointer;outline:none}
-#msvg .ring{fill:rgba(6,9,18,.6);stroke:var(--ink);stroke-opacity:.55;stroke-width:1.5}
-#msvg g.n:focus-visible .ring{stroke:var(--acc);stroke-opacity:1}
-#msvg .dot{fill:var(--acc);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.4,.5,1),fill .6s}
-#msvg g.n.on .dot{transform:scale(1)}#msvg g.n.near .dot{transform:scale(.45)}
-#msvg text{font:500 12.5px 'IBM Plex Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:rgba(6,9,18,.9);stroke-width:4px}
-#mi{min-height:92px;padding:4px 4px 0}
-#mi h3{font:600 1.25rem 'Space Grotesk',sans-serif;margin:0 0 2px}
-#mi p{margin:0;font-size:.9rem;color:var(--soft)}
-#mi .cn{margin-top:6px;color:var(--acc);font-size:.82rem;transition:color .6s}
-@media (max-width:860px){
- #v-home{pointer-events:auto;overflow:auto;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:64px 14px 96px}
- .mapbox{width:100%;margin-top:4px}
- .view{align-items:flex-end;padding:70px 14px 96px}
- .panel{padding:22px 20px;max-width:none;width:100%;border-radius:22px}
- h1{font-size:2.4rem}.scroll{max-height:46svh}
- #vp{align-items:stretch;padding-bottom:90px}.deck{height:380px}
- .dock a{padding:8px 11px;font-size:.84rem}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px}
+.logo{font:400 2.1rem/1 "Mrs Saint Delafield",cursive;color:var(--ink);text-decoration:none;white-space:nowrap}
+.logo b{font:600 1.05rem "Plus Jakarta Sans";color:var(--blue)}
+nav{display:flex;gap:2px;align-items:center}
+nav a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--soft);padding:7px 13px;border-radius:999px;transition:.2s}
+nav a:hover{color:var(--ink)}
+nav a.on{background:var(--card);color:var(--blue);box-shadow:var(--sh)}
+#th{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:1rem}
+section{padding:84px 0 12px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);margin:0}
+h2{font-weight:800;font-size:clamp(2rem,4.6vw,3rem);letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.lead{max-width:56ch;margin:0 0 38px;color:var(--soft)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding-top:64px}
+h1{font-weight:800;font-size:clamp(2.7rem,6.8vw,5.2rem);line-height:.98;letter-spacing:-.04em}
+.role{font:600 clamp(1.15rem,2.4vw,1.5rem) "Bricolage Grotesque";color:var(--blue);margin:16px 0 18px;min-height:2em}
+.role i{font-style:normal;display:inline-block;width:2px;height:1.1em;background:var(--blue);vertical-align:-.2em;margin-left:3px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.hero p.b{max-width:50ch;margin:0 0 26px}
+.btn{display:inline-block;padding:12px 24px;border-radius:14px;font-weight:600;text-decoration:none;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 10px 24px var(--glow);margin:0 10px 10px 0;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.o{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.soc{display:flex;gap:10px;margin:0 0 22px}
+.soc a{width:42px;height:42px;border-radius:50%;background:var(--card);box-shadow:var(--sh);display:grid;place-items:center;color:var(--soft);transition:.2s}
+.soc a:hover{color:var(--blue);transform:translateY(-2px)}
+.soc svg{width:19px;height:19px;fill:currentColor}
+.vis{position:relative;aspect-ratio:1;max-width:440px;width:100%;justify-self:center}
+.vis .ring{position:absolute;inset:4%;border-radius:50%;border:1.5px dashed var(--blue);opacity:.35;animation:sp 40s linear infinite}
+.vis .core{position:absolute;inset:14%;border-radius:36% 64% 58% 42%/42% 40% 60% 58%;background:linear-gradient(145deg,var(--blue),var(--blue2));display:grid;place-items:center;box-shadow:0 30px 60px var(--glow);animation:mo 14s ease-in-out infinite}
+.core span{font:800 clamp(4rem,10vw,6.5rem) "Bricolage Grotesque";color:#fff;letter-spacing:-.05em}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes mo{50%{border-radius:58% 42% 38% 62%/60% 56% 44% 40%}}
+.chip{position:absolute;background:var(--card);border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;padding:10px 16px;font-size:.84rem;line-height:1.3;color:var(--soft)}
+.chip b{display:block;font:800 1.3rem "Bricolage Grotesque";color:var(--ink)}
+.c1{left:-2%;top:12%}.c2{right:-3%;top:38%}.c3{left:6%;bottom:6%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:var(--sh);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px)}
+.dom .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--blue2));margin-bottom:16px}
+.ic svg{width:27px;height:27px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lbl{font:600 .78rem "Plus Jakarta Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.dom h3{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin:4px 0 12px}
+ul.st{list-style:none;margin:0;padding:0}
+ul.st li{position:relative;padding-left:24px;margin-bottom:9px;font-size:.96rem}
+ul.st li:before{content:"";position:absolute;left:2px;top:.62em;width:9px;height:9px;background:var(--blue);transform:rotate(45deg);border-radius:2px}
+.mq{overflow:hidden;margin:0 -24px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq .tr{display:flex;gap:12px;width:max-content;margin-bottom:12px;animation:mv 42s linear infinite}
+.mq:hover .tr{animation-play-state:paused}.mq .tr.r{animation-direction:reverse;animation-duration:50s}
+@keyframes mv{to{transform:translateX(-50%)}}
+.tk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px 20px;font-weight:600;color:var(--ink);white-space:nowrap;box-shadow:var(--sh)}
+.certs{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.certs span{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 14px;font-size:.84rem;color:var(--soft)}
+.tl{position:relative;padding-left:30px}
+.tl:before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--blue),var(--blue2));opacity:.3}
+.ti{position:relative;margin-bottom:18px}
+.ti:before{content:"";position:absolute;left:-29px;top:30px;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
+.ti .d{font-size:.84rem;font-weight:600;color:var(--blue)}
+.ti h3{font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin:2px 0}
+.ti .o{color:var(--soft);font-size:.93rem}
+.ti p{margin:8px 0 0;font-size:.95rem}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;width:fit-content;max-width:100%}
+.tabs button{border:0;background:none;font:500 .92rem "Plus Jakarta Sans";color:var(--soft);padding:8px 18px;border-radius:999px;cursor:pointer;transition:.2s}
+.tabs button.on{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.pj{display:flex;flex-direction:column;animation:pi .45s ease both}
+@keyframes pi{from{opacity:0;transform:scale(.97)}}
+.pj[hidden]{display:none}
+.fr{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:18px}
+.fr .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:.78rem;color:var(--soft)}
+.fr .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.fr .bar em{font-style:normal;margin-left:8px;background:var(--bg);border-radius:8px;padding:2px 12px}
+.fr .im{height:170px;display:grid;place-items:center;font:800 3.4rem "Bricolage Grotesque";letter-spacing:-.04em;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2))}
+.pj .m{display:flex;justify-content:space-between;font-size:.8rem}
+.pj h3{font-size:1.45rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 6px}
+.pj p{margin:0 0 16px;font-size:.95rem;color:var(--soft);flex:1}
+.tg{display:flex;flex-wrap:wrap;gap:7px;border-top:1px solid var(--line);padding-top:14px}
+.tg span{border:1px solid var(--line);border-radius:9px;padding:2px 11px;font-size:.78rem;font-weight:600;color:var(--ink)}
+.pp{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 4px;border-top:1px solid var(--line);align-items:center}
+.pp:first-child{border-top:0}
+.pp b{font:600 1.02rem "Plus Jakarta Sans";color:var(--ink)}
+.pp small{display:block;color:var(--soft);font-size:.86rem}
+.st2{font-size:.76rem;font-weight:600;border-radius:999px;padding:3px 12px;background:var(--glow);color:var(--blue);white-space:nowrap}
+.st2.u{background:transparent;border:1px dashed var(--soft);color:var(--soft)}
+.aw{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-bottom:22px}
+.aw .card{padding:22px}.aw h3{font-size:1.2rem;font-weight:800;margin:4px 0}.aw p{margin:0;font-size:.9rem;color:var(--soft)}
+.big{font:800 clamp(1.4rem,4.2vw,2.6rem) "Bricolage Grotesque";letter-spacing:-.03em;color:var(--blue);text-decoration:none;word-break:break-all}
+footer{padding:48px 0 60px;text-align:center;color:var(--soft);font-size:.9rem}
+.mapc{display:grid;grid-template-columns:1.3fr .7fr;gap:8px 28px;padding:22px 26px 22px 14px;align-items:center}
+#gm{width:100%;height:auto;display:block}
+#gm .e{stroke:var(--line);stroke-width:1.8;transition:stroke .3s}
+#gm .e.on{stroke:var(--blue);stroke-width:2.6}
+#gm g.n{cursor:pointer;outline:none}
+#gm .hl{opacity:.14;transform-box:fill-box;transform-origin:center;transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+#gm g.n:hover .hl{opacity:.25}#gm g.n.on .hl{transform:scale(1.55);opacity:.22}
+#gm .rg{fill:var(--card);stroke-width:2.6}
+#gm g.n:focus-visible .rg{stroke-width:4}
+#gm .dt{transform-box:fill-box;transform-origin:center;transform:scale(.35);transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+#gm g.n.on .dt{transform:scale(.8)}#gm g.n.nr .dt{transform:scale(.55)}
+#gm text{font:600 13px 'Plus Jakarta Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round}
+.lg{display:flex;flex-wrap:wrap;gap:6px 16px;padding:0 0 0 12px;grid-column:1;font-size:.82rem;color:var(--soft)}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+#gi{min-height:300px}
+#gi .lbl{display:inline-block;margin-bottom:6px}
+#gi h3{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+#gi p{margin:0 0 14px;font-size:.95rem}
+#gi h4{margin:12px 0 6px;font:600 .8rem 'Plus Jakarta Sans';color:var(--soft);letter-spacing:.06em;text-transform:uppercase}
+#gi .cs{display:flex;flex-wrap:wrap;gap:6px}
+#gi .cs span,#gi .cs button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:3px 12px;font:500 .82rem 'Plus Jakarta Sans';color:var(--ink)}
+#gi .cs button{cursor:pointer;color:var(--blue)}
+#gi .cs button:hover{background:var(--glow)}
+@media (max-width:900px){
+ .mapc{grid-template-columns:1fr;padding:18px 14px}.lg{grid-column:auto}#gi{min-height:0}
+ header .w{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px}
+ nav{order:3;width:100%;overflow-x:auto;padding-bottom:4px}nav a{white-space:nowrap}
+ html{scroll-padding-top:120px}
+ .hero{grid-template-columns:1fr;padding-top:36px}.vis{max-width:320px}
+ .grid2,.pg{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<canvas id="gl" aria-hidden="true"></canvas>
-<a class="brand" href="#home"><i></i>Shakib Basunia</a>
+<header><div class="w">
+  <a class="logo" href="#home">&lt; Shakib <b>Basunia</b> /&gt;</a>
+  <nav id="nav"><a href="#home">Home</a><a href="#map">Map</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#papers">Papers</a><a href="#activities">Activities</a><a href="#contact">Contact</a></nav>
+  <button id="th" type="button" aria-label="Toggle dark mode">&#9680;</button>
+</div></header>
 
-<section class="view" id="v-home"><div class="panel">
-  <h1>Shohedozzaman Basunia</h1>
-  <p>Researcher and developer in applied machine learning and educational technology. I build learning systems for Bangladeshi classrooms, and models that explain their predictions.</p>
-  <ul class="chips"><li>Federated learning</li><li>Knowledge tracing</li><li>NLP</li><li>Edge AI</li><li>AR learning</li></ul>
-  <a class="btn" href="#projects">View projects</a><a class="btn g" href="#research">Read research</a>
-</div>
-<div class="mapbox"><p class="cap">Research map. Hover or tap a topic to see the work and what it connects to.</p>
-<svg id="msvg" viewBox="0 0 480 400" role="group" aria-label="Map of research topics"></svg>
-<div id="mi" aria-live="polite"></div></div></section>
+<main class="w">
+<section id="home" class="hero">
+  <div>
+    <h1>Shohedozzaman Basunia</h1>
+    <div class="role">( <span id="ty"></span><i></i> )</div>
+    <p class="b">I research and build machine learning for education, climate and cybersecurity. Co-author of a published book on educational technology, and of papers accepted at IEEE and international conferences in 2026.</p>
+    <div class="soc"><a href="https://www.linkedin.com/in/shakibbasunia33" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.6h.06c.55-1 1.9-2 3.9-2 4.1 0 4.9 2.6 4.9 6.1v5.3h-4v-4.7c0-1.2 0-2.7-1.7-2.7s-1.9 1.3-1.9 2.6v4.8h-4z"/></svg></a><a href="mailto:2002033@icte.uftb.ac.bd" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H19.6zM4 9v8h16V9l-8 5.4z"/></svg></a></div>
+    <a class="btn" href="#projects">View projects</a><a class="btn o" href="#contact">Let’s talk</a>
+  </div>
+  <div class="vis" aria-hidden="true"><div class="ring"></div><div class="core"><span>SB</span></div>
+    <div class="chip c1"><b>14</b>accepted papers</div><div class="chip c2"><b>3.44</b>BSc CGPA, UFTB</div><div class="chip c3"><b>NDSS 2026</b>national champion</div></div>
+</section>
 
-<section class="view" id="v-projects">
-  <div class="top" style="width:100%">
-    <div style="text-align:center"><h2>Projects</h2><p class="soft">Drag, swipe or use the arrows to turn the deck.</p></div>
-    <div class="deck" id="deck"><div class="ring" id="ring">
-      <article class="card"><div class="t">Augmented reality</div><h3>EduX</h3><p>A WebAR learning platform that brings NCTB Class 1 to 5 topics onto a phone screen as objects a child can look at from every side.</p></article>
-      <article class="card"><div class="t">Inclusive learning</div><h3>LearnIt</h3><p>Personalized lessons for primary students in Bangladesh, adapted to each child’s pace.</p></article>
-      <article class="card"><div class="t">Explainable AI</div><h3>XKT-GenPath</h3><p>Knowledge tracing with generative path planning. It tracks what a student knows and says why it picked the next lesson.</p></article>
-      <article class="card"><div class="t">Edge AI, thesis</div><h3>Plastic waste classifier</h3><p>A real-time classification framework for plastic waste, running on a rover prototype.</p></article>
-      <article class="card"><div class="t">Accessibility</div><h3>Bangla Braille tool</h3><p>A learning app that helps visually impaired students practice Bangla Braille. In progress.</p></article>
-      <article class="card"><div class="t">Disaster management</div><h3>SROT (স্রোত)</h3><p>A flood and disaster app with a full interface design for communities in flood-prone areas.</p></article>
-    </div></div>
-    <div class="ctl"><button id="pv" aria-label="Previous project">&#8592;</button><span id="cnt"></span><button id="nx" aria-label="Next project">&#8594;</button></div>
+<section id="map">
+  <h2>Research at a glance</h2><p class="lead">Tap a topic to see the projects and papers behind it. Bigger circles mean more work.</p>
+  <div class="card mapc">
+    <svg id="gm" viewBox="0 0 580 440" role="group" aria-label="Map of research topics. Select a topic to see related projects and papers."></svg>
+    <div id="gi" aria-live="polite"></div>
+    <div class="lg"><span><i style="background:#2457f5"></i>EdTech</span><span><i style="background:#7c5cff"></i>Machine learning</span><span><i style="background:#db2777"></i>Security</span><span><i style="background:#0891b2"></i>IoT and climate</span></div>
   </div>
 </section>
 
-<section class="view" id="v-research"><div class="panel"><h2>Research</h2><div class="scroll">
-  <div class="pap"><b>Student confusion in online forums</b><span>COMPAS 2026, IEEE, University of Dhaka</span><p>Confusion detection with NLP and deep learning.</p></div>
-  <div class="pap"><b>Voices of the July</b><span>IIUC conference, oral presentation</span><p>A 10 minute talk with 3 minutes of questions.</p></div>
-  <div class="pap"><b>DNS spoofing and cache poisoning</b><span>Network security</span><p>A leakage-aware stacked ensemble, tested on CICIDS2017 and simulated DNS data.</p></div>
-  <div class="pap"><b>Federated dropout prediction</b><span>Federated learning</span><p>FedProx, differential privacy and non-IID data on OULAD.</p></div>
-  <div class="pap"><b>Transformer weather prediction</b><span>Climate modeling</span><p>Explainable forecasts that support crop cultivation planning.</p></div>
-  <div class="pap"><b>Educational methods and technological transformation</b><span>Book, co-author</span><p>A published volume on how technology changes teaching.</p></div>
-</div></div></section>
+<section id="about">
+  <h2>What I do</h2><p class="lead">Four areas where I do most of my research and building.</p>
+  <div class="grid2">
+    <div class="card dom"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="20" r="2"/><path d="M6.5 7.5l4 3.2M17.5 7.5l-4 3.2M12 14.5V18"/></svg></div><span class="lbl">Domain expert</span><h3>Applied ML and federated learning</h3>
+      <ul class="st"><li>Privacy preserving student dropout prediction with FedProx, differential privacy and non-IID data</li><li>ClsMeta-IDS: federated meta-learning for IoT anomaly detection</li><li>Stacking ensembles for dropout, teacher quality and burnout prediction</li><li>CTGAN versus SMOTE for explainable diabetes prediction</li></ul></div>
+    <div class="card dom"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c3 2.4 9 2.4 12 0v-4.5"/></svg></div><span class="lbl">Domain expert</span><h3>Educational technology</h3>
+      <ul class="st"><li>EduX: a WebAR platform for NCTB Class 1 to 5 lessons</li><li>LearnIt and XKT-GenPath for personalized, explainable learning paths</li><li>Student confusion detection in online forums with NLP and deep learning</li><li>Bangla Braille learning tool for visually impaired students</li></ul></div>
+    <div class="card dom"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><span class="lbl">Domain expert</span><h3>Cybersecurity and language models</h3>
+      <ul class="st"><li>Trust-aware, prompt-injection-resilient RAG for SOC alert correlation</li><li>Leakage-aware stacked ensemble for DNS spoofing and cache poisoning</li><li>Banglish to English summarization fine-tuned with QLoRA</li></ul></div>
+    <div class="card dom"><div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></div><span class="lbl">Domain expert</span><h3>Edge AI, IoT and climate</h3>
+      <ul class="st"><li>Plastic waste classification and collection routing on a rover prototype</li><li>IoT safe kitchen hazard detection with NodeMCU ESP8266</li><li>Transformer weather prediction with explainable AI for crop planning</li><li>Humidity and temperature sensitivity in climate modeling for Sylhet</li></ul></div>
+  </div>
+</section>
 
-<section class="view" id="v-about"><div class="panel"><h2>About</h2>
-  <p>I finished the Bachelor of Science in Educational Technology and Engineering at the University of Frontier Technology, Bangladesh, in the EDTE 2020-21 batch.</p>
-  <p class="soft">My papers cover education, climate modeling, cybersecurity and federated learning. I am applying for graduate scholarships and teaching posts.</p>
-  <ul class="facts"><li><span>Degree</span><span>BSc, Educational Technology and Engineering</span></li><li><span>University</span><span>UFTB</span></li><li><span>Languages</span><span>Bangla, English</span></li></ul>
-</div></section>
+<section id="skills">
+  <h2>Skills and tools</h2><p class="lead">What I use day to day, and the courses behind it.</p>
+  <div class="mq"><div class="tr" id="m1"></div><div class="tr r" id="m2"></div></div>
+  <div class="certs"><span>Employability Skilling, Wadhwani Foundation, 2023</span><span>Cybersecurity and the IoT, Coursera, 2023</span><span>Relational Databases and SQL, Coursera, 2024</span><span>Cyber Security, Creative IT, 2024</span><span>Prompt Engineering for Developers, DeepLearning.AI</span><span>Data Analytics, Ostad, 2024</span><span>Pathway to Software Engineering, Ostad, 2025</span></div>
+</section>
 
-<section class="view" id="v-contact"><div class="panel"><h2>Let’s talk</h2>
-  <p class="soft">Research collaboration, graduate study or teaching roles.</p>
-  <a class="mail" href="mailto:your-email@example.com">your-email@example.com</a>
-  <a class="btn g" href="https://github.com/">GitHub</a><a class="btn g" href="https://www.linkedin.com/">LinkedIn</a>
-</div></section>
+<section id="education">
+  <h2>Education</h2><p class="lead">From a science track in Rangpur to a degree in educational technology and engineering.</p>
+  <div class="tl">
+    <div class="ti card"><div class="d">Session 2020-21</div><h3>BSc (Hons.) in Educational Technology and Engineering</h3><div class="o">University of Frontier Technology, Bangladesh (UFTB)</div><p>CGPA 3.44 with 164.5 credit hours. Coursework included data structures and algorithms, databases, networking, cyber security, mobile learning app development, and big data and analytics in education.</p></div>
+    <div class="ti card"><div class="d">2020</div><h3>HSC, Science</h3><div class="o">Police Lines School and College, Rangpur</div><p>GPA 5.00, Dinajpur Board.</p></div>
+    <div class="ti card"><div class="d">2020</div><h3>SSC, Science</h3><div class="o">Hatibandha SS Govt. High School, Lalmonirhat</div><p>GPA 5.00 with a Board Scholarship, Dinajpur Board.</p></div>
+  </div>
+</section>
 
-<nav class="dock" id="dock" aria-label="Sections">
-  <a href="#home">Home</a><a href="#projects">Projects</a><a href="#research">Research</a><a href="#about">About</a><a href="#contact">Contact</a>
-</nav>
+<section id="experience">
+  <h2>Experience</h2><p class="lead">Research, media, entrepreneurship and community work.</p>
+  <div class="tl" id="ex"></div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2><p class="lead">Selected work. Filter by area.</p>
+  <div class="tabs" id="tabs"><button class="on" data-f="all">All</button><button data-f="ml">Machine learning</button><button data-f="edtech">EdTech</button><button data-f="iot">IoT and edge</button><button data-f="web">Apps</button></div>
+  <div class="pg" id="pg"></div>
+</section>
+
+<section id="papers">
+  <h2>Papers and book</h2><p class="lead">Co-authored the book Shikkhapoddhoti O Projuktigoto Rupantor (2026), plus the papers below.</p>
+  <div class="card" id="pp"></div>
+</section>
+
+<section id="activities">
+  <h2>Activities and honors</h2><p class="lead">Awards, talks and the communities I belong to.</p>
+  <div class="aw">
+    <div class="card"><span class="lbl">Champion, 2026</span><h3>National Data Science Summit</h3><p>NDSS 2026, Daffodil International University.</p></div>
+    <div class="card"><span class="lbl">Champion, 2022</span><h3>AppLink Idea and Innovation Contest</h3><p>Won the national idea contest.</p></div>
+    <div class="card"><span class="lbl">2018</span><h3>Best Campus Ambassador</h3><p>Bangladesh Stockholm Junior Water Prize.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3 style="font-size:1.3rem;margin-bottom:10px">Presented at</h3><ul class="st"><li>IEEE COMPAS 2026, University of Dhaka</li><li>MIET 2026 and IEEE PEEIACON 2026</li><li>IEEE CS BDC Summer Symposium 2025</li><li>EDU EXPO 2023 and DUET Tech Fest 2023</li></ul></div>
+    <div class="card"><h3 style="font-size:1.3rem;margin-bottom:10px">Memberships</h3><ul class="st"><li>IEEE Student Member, Bangladesh Section, 2026 to present</li><li>Executive Member, BD Clean (Rangpur Zone)</li><li>Executive Member, BDU Programming Club and Cultural Club</li><li>Campus Ambassador for several youth and tech programs</li></ul></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Let’s work together</h2><p class="lead">Open to research collaboration, graduate study and teaching roles.</p>
+  <div class="card"><a class="big" href="mailto:2002033@icte.uftb.ac.bd">2002033@icte.uftb.ac.bd</a><p style="margin:12px 0 0"><a href="https://www.linkedin.com/in/shakibbasunia33" style="color:var(--blue);font-weight:600">linkedin.com/in/shakibbasunia33</a></p></div>
+</section>
+</main>
+<footer>© 2026 MD Shohedozzaman Basunia</footer>
 
 <script>
-var RT={home:["#36e0ff",.4,0,-2.2,.95],projects:["#a78bfa",0,1.7,-4.5,.7],research:["#ffb454",-2.6,0,-1,.9],about:["#4ade80",2.6,-.2,-1,.9],contact:["#ff5d8f",0,0,-1,1.15]};
-var cur="home",mx=0,my=0,GL=null;
-function route(){var r=(location.hash||"#home").slice(1);if(!RT[r])r="home";cur=r;
- document.documentElement.style.setProperty("--acc",RT[r][0]);
- [].forEach.call(document.querySelectorAll(".view"),function(v){v.classList.toggle("on",v.id==="v-"+r)});
- [].forEach.call(document.querySelectorAll("#dock a"),function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+r)});
- if(GL)GL.tc.set(RT[r][0])}
-addEventListener("hashchange",route);
+var $=function(s){return document.querySelector(s)},calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+var TK=["Python","C","Java","PHP","HTML and CSS","MySQL","Oracle","Federated learning","FedProx","Transformers","Explainable AI","NLP","QLoRA","NodeMCU ESP8266","WebAR","Data analytics","Google Sheets","MS Office"];
+[["m1",TK],["m2",TK.slice().reverse()]].forEach(function(r){var h="";for(var k=0;k<2;k++)r[1].forEach(function(t){h+='<span class="tk">'+t+'</span>'});$("#"+r[0]).innerHTML=h});
 
-(function(){var cv=document.getElementById("gl"),R;
- try{R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true})}catch(e){return}
- var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(50,1,.1,100),G=new THREE.Group(),P=[],L=[],i,j;
- C.position.z=7;S.add(G);
- for(i=0;i<110;i++){var u=Math.random()*2-1,a=Math.random()*6.283,r=Math.sqrt(1-u*u);P.push(new THREE.Vector3(r*Math.cos(a),u,r*Math.sin(a)).multiplyScalar(1.6+Math.random()*.8))}
- for(i=0;i<P.length;i++)for(j=i+1;j<P.length;j++)if(P[i].distanceTo(P[j])<1.05){L.push(P[i],P[j])}
- var add=additive;function additive(m){m.transparent=true;m.blending=THREE.AdditiveBlending;m.depthWrite=false;return m}
- var pm=add(new THREE.PointsMaterial({size:.1,color:0x36e0ff,opacity:.95})),lm=add(new THREE.LineBasicMaterial({color:0x36e0ff,opacity:.22})),
- cm=add(new THREE.MeshBasicMaterial({color:0x36e0ff,wireframe:true,opacity:.35})),rm=add(new THREE.MeshBasicMaterial({color:0x36e0ff,opacity:.5}));
- G.add(new THREE.Points(new THREE.BufferGeometry().setFromPoints(P),pm));
- G.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(L),lm));
- var core=new THREE.Mesh(new THREE.IcosahedronGeometry(.95,1),cm);G.add(core);
- var r1=new THREE.Mesh(new THREE.TorusGeometry(2.9,.012,8,200),rm),r2=new THREE.Mesh(new THREE.TorusGeometry(3.3,.01,8,200),rm);
- r1.rotation.x=1.2;r2.rotation.set(.4,.9,0);G.add(r1,r2);
- var mats=[pm,lm,cm,rm],tc=new THREE.Color(0x36e0ff);GL={tc:tc};
- function fit(){var w=innerWidth,h=innerHeight;R.setPixelRatio(Math.min(devicePixelRatio||1,2));R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix()}
- fit();addEventListener("resize",fit);
- addEventListener("pointermove",function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
- var calm=matchMedia("(prefers-reduced-motion:reduce)").matches,t=0,s=1;
- function tick(){t+=calm?0:.01;var m=innerWidth<860,k=RT[cur],tx=m?0:k[1],ty=m?(cur==="projects"?2.2:1.5):k[2],tz=m?k[3]-1.2:k[3],ts=m?k[4]*.8:k[4];
-  G.position.x+=(tx-G.position.x)*.05;G.position.y+=(ty-G.position.y)*.05;G.position.z+=(tz-G.position.z)*.05;s+=(ts-s)*.05;G.scale.setScalar(s);
-  G.rotation.y+=((t*.25+mx*1.2)-G.rotation.y)*.06;G.rotation.x+=((my*.7)-G.rotation.x)*.06;
-  core.rotation.y=-t*.8;r1.rotation.z=t*.4;r2.rotation.z=-t*.3;pm.size=.1+Math.sin(t*3)*.015;
-  mats.forEach(function(q){q.color.lerp(tc,.05)});R.render(S,C);requestAnimationFrame(tick)}
- tick()})();
-route();
+var EX=[["Mar 2025 to Sep 2026","Correspondent Reporter","Morning Post","Reported news and sent advertisements from Gazipur."],
+["Oct to Nov 2024","Corporate Navigator Trainee","Youth Upskill Network (YUNet)","Trained in communication, leadership, tech and corporate skills."],
+["Jan to Jul 2024","Research Assistant","University of Frontier Technology","Contributed to university research projects until their completion."],
+["2023 to 2024","Head of Promotion","UFTB Hult Prize Foundation","Led promotion for the campus Hult Prize chapter."],
+["2022 to present","Core Team and Publication Secretary","Takiyon science publication","Handles publication work for the science publication."],
+["2020 to 2023","Entrepreneur","Boichitro and BDU food catering","Ran an online book shop (2020 to 2022) and a food catering business (2022 to 2023)."],
+["2018 to present","Founder","Alokcchota","A social organization. Organized events with Alokcchota and Punnota Foundation."]];
+$("#ex").innerHTML=EX.map(function(e){return '<div class="ti card"><div class="d">'+e[0]+'</div><h3>'+e[1]+'</h3><div class="o">'+e[2]+'</div><p>'+e[3]+'</p></div>'}).join("");
 
-var ring=document.getElementById("ring"),deck=document.getElementById("deck"),cards=[].slice.call(ring.children),n=cards.length,st=360/n,rot=0,Rd,x0,r0,dg=false;
-function lay(){var w=innerWidth<860?220:260;Rd=Math.round(w/2/Math.tan(Math.PI/n))+60;ring.style.width=w+"px";
- cards.forEach(function(c,k){c.style.transform="rotateY("+k*st+"deg) translateZ("+Rd+"px)"});app()}
-function app(){ring.style.transform="translateZ(-"+Rd+"px) rotateY("+-rot+"deg)";var a=((Math.round(rot/st)%n)+n)%n;
- cards.forEach(function(c,k){c.classList.toggle("act",k===a)});document.getElementById("cnt").textContent=(a+1)+" of "+n}
-function go(d){rot=(Math.round(rot/st)+d)*st;app()}
-document.getElementById("pv").onclick=function(){go(-1)};document.getElementById("nx").onclick=function(){go(1)};
-deck.addEventListener("pointerdown",function(e){dg=true;x0=e.clientX;r0=rot;ring.classList.add("d");deck.setPointerCapture(e.pointerId)});
-deck.addEventListener("pointermove",function(e){if(!dg)return;rot=r0-(e.clientX-x0)*.35;app()});
-function up(){if(!dg)return;dg=false;ring.classList.remove("d");rot=Math.round(rot/st)*st;app()}
-deck.addEventListener("pointerup",up);deck.addEventListener("pointercancel",up);
-addEventListener("keydown",function(e){if(cur!=="projects")return;if(e.key==="ArrowRight")go(1);if(e.key==="ArrowLeft")go(-1)});
-cards.forEach(function(c,k){c.addEventListener("click",function(){var a=Math.round(rot/st),cu=((a%n)+n)%n,d=k-cu;if(d>n/2)d-=n;if(d<-n/2)d+=n;if(d)go(d)})});
-addEventListener("resize",lay);lay();
+var PJ=[["EduX","edtech","EdTech and AR","A WebAR learning platform that brings NCTB Class 1 to 5 topics onto a phone as objects a child can view from every side.",["WebAR","NCTB","UFTB"],"AR","#2457f5","#7c5cff"],
+["XKT-GenPath","ml edtech","Explainable AI","Knowledge tracing with generative path planning. It tracks what a student knows and explains the next lesson it picks.",["Knowledge tracing","XAI"],"XAI","#7c5cff","#d946ef"],
+["Plastic waste classifier","ml iot","Edge AI, thesis","Real-time plastic waste classification and collection routing, tested on a rover prototype. Accepted at MIET 2026.",["Edge AI","Rover","Python"],"Edge","#0891b2","#2457f5"],
+["Federated dropout prediction","ml edtech","Federated learning","Privacy preserving student dropout prediction on OULAD with FedProx, differential privacy and non-IID data.",["FedProx","DP","OULAD"],"FL","#4f46e5","#06b6d4"],
+["Transformer weather prediction","ml","Time-series ML","A transformer forecaster with explainable AI that supports crop cultivation planning. Accepted at MIET 2026.",["Transformer","XAI"],"T","#059669","#2457f5"],
+["IoT Safe Kitchen","iot","IoT, hardware","Automated hazard detection and protection for kitchens, built on a NodeMCU ESP8266. Presented at IEEE COMPAS 2026.",["NodeMCU","ESP8266","IoT"],"IoT","#ea580c","#db2777"],
+["LearnIt","edtech","EdTech","Personalized, inclusive lessons for primary students in Bangladesh, adapted to each child’s pace.",["Personalization","Inclusion"],"Aa","#d97706","#ea580c"],
+["Bangla Braille tool","edtech web","Accessibility","A learning app that helps visually impaired students practice Bangla Braille.",["Bangla","Accessibility"],"⠃⠗","#7c5cff","#2457f5"],
+["SROT (স্রোত)","web","Mobile app","A flood and disaster management app with a full interface design for flood-prone communities.",["Mobile","UI design"],"স্রোত","#0891b2","#059669"],
+["AI Lesson Plan Generator","edtech web","AI tool","An AI tool that drafts lesson plans for teachers. Presented at EDU EXPO 2023.",["AI","Teaching"],"LP","#db2777","#7c5cff"]];
+function rp(){$("#pg").innerHTML=PJ.map(function(p){return '<article class="card pj" data-c="'+p[1]+'"><div class="fr"><div class="bar"><i></i><i></i><i></i><em>'+p[2]+'</em></div><div class="im" style="--g1:'+p[6]+';--g2:'+p[7]+'">'+p[5]+'</div></div><div class="m"><span class="lbl">'+p[2]+'</span></div><h3>'+p[0]+'</h3><p>'+p[3]+'</p><div class="tg">'+p[4].map(function(t){return '<span>'+t+'</span>'}).join("")+'</div></article>'}).join("")}rp();
+$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var f=b.dataset.f;
+ [].forEach.call(document.querySelectorAll("#tabs button"),function(x){x.classList.toggle("on",x===b)});
+ [].forEach.call(document.querySelectorAll(".pj"),function(c){var s=f==="all"||c.dataset.c.split(" ").indexOf(f)>-1;c.hidden=!s;if(s){c.style.animation="none";void c.offsetWidth;c.style.animation=""}})});
 
-var MT=[
-{id:"kt",l:"Knowledge tracing",x:100,y:90,t:"Models that follow what a student knows over time. XKT-GenPath adds explanations and a generated study path."},
-{id:"fl",l:"Federated learning",x:360,y:70,t:"Dropout prediction on OULAD that trains across institutions without sharing student records."},
-{id:"nl",l:"Language models",x:415,y:200,t:"Confusion detection in forum posts, and LLM cyber-defense work with Mahfuza Maisha."},
-{id:"ar",l:"Augmented reality",x:70,y:225,t:"EduX brings NCTB Class 1 to 5 lessons into WebAR on ordinary phones."},
-{id:"ed",l:"Edge AI",x:235,y:325,t:"The plastic waste classifier runs on a rover, so sorting happens on the device."},
-{id:"sc",l:"Security",x:395,y:320,t:"A stacked ensemble that detects DNS spoofing and cache poisoning without data leakage."},
-{id:"cl",l:"Climate and XAI",x:240,y:165,t:"Transformer weather prediction with explanations that planners and farmers can read."},
-{id:"ac",l:"Accessibility",x:80,y:335,t:"A Bangla Braille tool for visually impaired students, and the inclusive LearnIt platform."}];
-var ME=[["kt","cl"],["kt","ar"],["kt","fl"],["fl","nl"],["fl","cl"],["nl","sc"],["ar","ac"],["ar","ed"],["ed","sc"],["cl","ed"],["cl","nl"],["ac","ed"]];
-var ms=document.getElementById("msvg"),NS="http://www.w3.org/2000/svg",mb={},mi={},mauto;
+var PP=[["Student confusion detection in online learning forums","IEEE COMPAS 2026","Presented"],["IoT Based Safe Kitchen with NodeMCU ESP8266","IEEE COMPAS 2026","Presented"],
+["Plastic waste classification and collection routing","MIET 2026, Springer journal","Accepted"],["Transformer weather prediction with explainable AI","MIET 2026, Springer journal","Accepted"],
+["Privacy preserving federated learning for student dropout","IEEE RAAICON 2026","Accepted"],["CTGAN vs SMOTE for explainable diabetes prediction","IEEE RAAICON 2026","Accepted"],
+["Stacking ensemble for early student dropout prediction","ICCA 2026","Accepted"],["FairEval: teacher quality prediction","ICCA 2026","Accepted"],
+["ClsMeta-IDS: federated meta-learning for IoT anomaly detection","Electrical, Computer and Communication Technologies conference","Presented"],["V2H Control: dual-stage strategy under variable EV battery SoC","IEEE PEEIACON 2026","Presented"],
+["Trust-aware, prompt-injection-resilient RAG for SOC alert correlation","OIC-CERT Journal of Cyber Security","Accepted"],["Banglish to English cross-lingual summarization with QLoRA","IEEE BECITHCON 2026","Accepted"],
+["The 2024 Bangladesh Mass Uprising","ICISET 2026","Accepted"],["Humidity-temperature sensitivity in climate modeling for Sylhet","IEEE PECCII 2026","Published"],
+["NXTGen-Tech model for Bangladesh graduate employability","International Journal of Educational Development","Under review"]];
+$("#pp").innerHTML=PP.map(function(p){return '<div class="pp"><div><b>'+p[0]+'</b><small>'+p[1]+'</small></div><span class="st2'+(p[2]==="Under review"?" u":"")+'">'+p[2]+'</span></div>'}).join("");
+
+var tp=["Applied ML researcher","EdTech developer","Academic writer"],ti=0,ci=0,del=false,ty=$("#ty");
+function type(){var w=tp[ti];ty.textContent=w.slice(0,ci);if(!del&&ci===w.length){del=true;return setTimeout(type,1500)}if(del&&ci===0){del=false;ti=(ti+1)%tp.length}ci+=del?-1:1;setTimeout(type,del?40:80)}
+if(calm)ty.textContent=tp[0];else type();
+
+var links=[].slice.call(document.querySelectorAll("#nav a"));
+links.forEach(function(a){a.addEventListener("click",function(e){var t=document.getElementById(a.getAttribute("href").slice(1));if(t){e.preventDefault();t.scrollIntoView({behavior:calm?"auto":"smooth"})}})});
+var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting)links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+x.target.id)})})},{rootMargin:"-40% 0px -55% 0px"});secs.forEach(function(s){io.observe(s)});
+
+var GN={ed:"EdTech",ml:"Machine learning",se:"Security",io:"IoT and climate"},GC={ed:"#2457f5",ml:"#7c5cff",se:"#db2777",io:"#0891b2"};
+var MP=[
+{id:"kt",l:"Knowledge tracing",g:"ed",x:120,y:100,d:"Models that follow what a student knows over time, then plan and explain the next lesson.",pr:["XKT-GenPath","LearnIt"],pa:[]},
+{id:"la",l:"Learning analytics",g:"ml",x:290,y:150,d:"Predicting dropout, teacher quality and burnout from education data.",pr:["Federated dropout prediction"],pa:["Stacking ensemble for dropout (ICCA)","FairEval teacher quality (ICCA)","Federated dropout (RAAICON)"]},
+{id:"fl",l:"Federated learning",g:"ml",x:455,y:85,d:"Training across institutions and devices without sharing raw records, with FedProx and differential privacy.",pr:["Federated dropout prediction"],pa:["Privacy preserving dropout (RAAICON)","ClsMeta-IDS (ECCT conference)"]},
+{id:"sec",l:"Cybersecurity",g:"se",x:495,y:240,d:"Detecting attacks and anomalies, and keeping language models trustworthy in a SOC.",pr:[],pa:["Prompt-injection-resilient RAG (OIC-CERT)","ClsMeta-IDS (ECCT conference)"]},
+{id:"nlp",l:"Language models",g:"ml",x:300,y:275,d:"NLP and deep learning for forum posts, Banglish text and security alerts.",pr:[],pa:["Student confusion detection (COMPAS)","Banglish summarization with QLoRA (BECITHCON)","Prompt-injection-resilient RAG (OIC-CERT)"]},
+{id:"ar",l:"Augmented reality",g:"ed",x:65,y:245,d:"Lessons that appear as 3D objects on an ordinary phone, with no extra hardware.",pr:["EduX"],pa:[]},
+{id:"acc",l:"Accessibility",g:"ed",x:150,y:375,d:"Learning tools for visually impaired students and for children who learn at different paces.",pr:["Bangla Braille tool","LearnIt"],pa:[]},
+{id:"edge",l:"Edge AI and IoT",g:"io",x:385,y:375,d:"Models and sensors that run on small devices such as a rover or a NodeMCU board.",pr:["Plastic waste classifier","IoT Safe Kitchen"],pa:["Plastic waste classification (MIET)","IoT Safe Kitchen (COMPAS)"]},
+{id:"clim",l:"Climate and XAI",g:"io",x:515,y:370,d:"Explainable forecasts for weather and crop planning in Bangladesh.",pr:["Transformer weather prediction"],pa:["Transformer weather prediction (MIET)","Sylhet climate modeling (PECCII)"]}];
+var ME=[["kt","la"],["la","fl"],["fl","sec"],["sec","nlp"],["nlp","la"],["ar","acc"],["kt","acc"],["ar","kt"],["edge","clim"],["edge","sec"],["fl","edge"]];
+var gm=$("#gm"),NS="http://www.w3.org/2000/svg",gi={},gb={},gauto,gseen=true;
 function mk(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e}
-MT.forEach(function(t){mi[t.id]=t});
-ME.forEach(function(p){var a=mi[p[0]],b=mi[p[1]],l=mk("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,"class":"e"});l.dataset.a=a.id;l.dataset.b=b.id;ms.appendChild(l)});
-MT.forEach(function(t){var g=mk("g",{"class":"n",tabindex:0,role:"button","aria-label":t.l,transform:"translate("+t.x+","+t.y+")"});
- g.appendChild(mk("circle",{r:16,"class":"ring"}));g.appendChild(mk("circle",{r:9,"class":"dot"}));
- var tx=mk("text",{y:33,"text-anchor":"middle"});tx.textContent=t.l;g.appendChild(tx);ms.appendChild(g);mb[t.id]=g;
- ["mouseenter","focus","click"].forEach(function(ev){g.addEventListener(ev,function(){mpick(t.id);clearInterval(mauto)})})});
-function mpick(id){var t=mi[id],near={},names=[];
- ms.querySelectorAll(".e").forEach(function(l){var on=l.dataset.a===id||l.dataset.b===id;l.classList.toggle("on",on);if(on){var o=l.dataset.a===id?l.dataset.b:l.dataset.a;near[o]=1;names.push(mi[o].l)}});
- for(var k in mb){mb[k].classList.toggle("on",k===id);mb[k].classList.toggle("near",k!==id&&!!near[k])}
- document.getElementById("mi").innerHTML="<h3>"+t.l+"</h3><p>"+t.t+"</p><div class=\"cn\">Connected: "+names.join(", ")+"</div>"}
-mpick("kt");
-if(!matchMedia("(prefers-reduced-motion:reduce)").matches){var mo=["kt","cl","fl","nl","sc","ed","ar","ac"],mn=0;mauto=setInterval(function(){if(cur!=="home")return;mn=(mn+1)%mo.length;mpick(mo[mn])},3800)}
+MP.forEach(function(t){gi[t.id]=t;t.r=15+2.6*(t.pr.length+t.pa.length)});
+ME.forEach(function(p){var a=gi[p[0]],b=gi[p[1]],l=mk("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,"class":"e"});l.dataset.a=a.id;l.dataset.b=b.id;gm.appendChild(l)});
+MP.forEach(function(t){var c=GC[t.g],g=mk("g",{"class":"n",tabindex:0,role:"button","aria-label":t.l,transform:"translate("+t.x+","+t.y+")"});
+ g.appendChild(mk("circle",{r:t.r+8,fill:c,"class":"hl"}));g.appendChild(mk("circle",{r:t.r,stroke:c,"class":"rg"}));g.appendChild(mk("circle",{r:t.r*.62,fill:c,"class":"dt"}));
+ var tx=mk("text",{y:t.r+19,"text-anchor":"middle"});tx.textContent=t.l;g.appendChild(tx);gm.appendChild(g);gb[t.id]=g;
+ ["mouseenter","focus","click"].forEach(function(ev){g.addEventListener(ev,function(){gpick(t.id);clearInterval(gauto)})})});
+function chips(a){return a.length?'<div class="cs">'+a.map(function(x){return '<span>'+x+'</span>'}).join("")+'</div>':'<div class="cs"><span>Linked through other topics</span></div>'}
+function gpick(id){var t=gi[id],near=[];
+ gm.querySelectorAll(".e").forEach(function(l){var on=l.dataset.a===id||l.dataset.b===id;l.classList.toggle("on",on);if(on)near.push(l.dataset.a===id?l.dataset.b:l.dataset.a)});
+ for(var k in gb){gb[k].classList.toggle("on",k===id);gb[k].classList.toggle("nr",k!==id&&near.indexOf(k)>-1)}
+ $("#gi").innerHTML='<span class="lbl" style="color:'+GC[t.g]+'">'+GN[t.g]+'</span><h3>'+t.l+'</h3><p>'+t.d+'</p><h4>Projects</h4>'+chips(t.pr)+'<h4>Papers</h4>'+chips(t.pa)+'<h4>Connected to</h4><div class="cs">'+near.map(function(n){return '<button type="button" data-id="'+n+'">'+gi[n].l+'</button>'}).join("")+'</div>'}
+$("#gi").addEventListener("click",function(e){var b=e.target.closest("button[data-id]");if(b){gpick(b.dataset.id);clearInterval(gauto)}});
+gpick("la");
+if(!calm){var go=["la","fl","sec","nlp","kt","ar","acc","edge","clim"],gn=0;gauto=setInterval(function(){if(gseen){gn=(gn+1)%go.length;gpick(go[gn])}},4200);
+ new IntersectionObserver(function(en){gseen=en[0].isIntersecting}).observe($("#map"))}
+
+var h=document.documentElement;function dk(){return getComputedStyle(h).colorScheme.indexOf("dark")>-1}
+$("#th").onclick=function(){h.setAttribute("data-theme",dk()?"light":"dark")};
 </script>
 </body>
 </html>
